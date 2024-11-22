@@ -1,6 +1,4 @@
-const express = require("express");
 const mongoose = require("mongoose");
-const { type } = require("os");
 
 const entertainmentSchema = new mongoose.Schema({
   name: {
@@ -13,7 +11,7 @@ const entertainmentSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Cartoon", "Movie"],
+    enum: ["TV Series", "Movie"],
     required: true,
   },
   description: {
@@ -25,14 +23,12 @@ const entertainmentSchema = new mongoose.Schema({
     required: true,
   },
   rating: {
-    type: Number,
-    min: 0,
-    max: 10,
+    type: String,
+
     required: true,
   },
-  image_url: {
+  imageURL: {
     type: String,
-    required: true,
   },
 });
 

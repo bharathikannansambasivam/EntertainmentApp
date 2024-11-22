@@ -11,39 +11,43 @@ app.use(express.json());
 const entertainmentModel = require("./models/model");
 
 app.get("/", (req, res) => {
-  res.send("Helllooo");
-});
-
-app.post("/entertainment", async (req, res) => {
-  const { name, genre, category, description, release_year, rating } = req.body;
-
-  try {
-    const movieData = {
-      name,
-      genre,
-      category,
-      description,
-      release_year,
-      rating,
-      image_url:
-        "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-    };
-
-    const movies = await entertainmentModel.create(movieData);
-    res.send(movies);
-  } catch (e) {
-    res.send(e.message);
-  }
+  res.send("Hello");
 });
 
 app.get("/getAllMovies", async (req, res) => {
   try {
-    const movies = await entertainmentModel.find();
+    const page = parseInt(req.query.page) || 1;
+    const limit = 16;
+    const startIndex = (page - 1) * limit;
+
+    const movies = await entertainmentModel
+      .find()
+      .skip(startIndex)
+      .limit(limit);
+
     res.send(movies);
   } catch (e) {
-    res.send(e.message);
+    res.status(500).send(e.message);
   }
 });
+
+app.get("/search", async (req, res) => {
+  const { title } = req.query;
+
+  try {
+    const movies = await entertainmentModel.find({
+      title: { $regex: title, $options: "i" },
+    });
+    if (movies.length > 0) {
+      res.json(movies);
+    } else {
+      res.status(404).json({ message: "No movies found" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "An error occurred", err });
+  }
+});
+
 mongoose.connect(MONGO_URL).then(() => {
   console.log("DB Connected Successfully");
   app.listen(PORT, () => {
