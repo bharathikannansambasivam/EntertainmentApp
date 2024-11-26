@@ -1,13 +1,13 @@
-import ShowItem from "./ShowItem";
+import ShowItem from "./ShowItems";
 
-import useFetchData from "../api/useFetchData";
+import useFetchData from "../api/fetchShows/useFetchData";
 
 export default function Trending() {
   const { show } = useFetchData();
 
   return (
-    <div className="bg-primaryBg">
-      <div className="bg-primaryBg min-h-[400px] mb-10 p-4">
+    <div className="bg-primaryBg p-1 text-white">
+      <div className=" min-h-[400px] mb-10 p-4">
         {" "}
         {/* Added padding */}
         <h1 className="text-3xl font-bold mb-6">Trending...</h1>

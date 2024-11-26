@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getMoviesAPI } from "./getMoviesAPI";
 
 function useFetchData(pageNumber) {
   const [show, setShow] = useState([]);
@@ -12,14 +12,10 @@ function useFetchData(pageNumber) {
       try {
         setLoading(true);
         setError(false);
-
         console.log("pageNumberpageNumber", pageNumber);
-        const response = await axios.get(
-          `http://localhost:3000/getAllMovies?page=${pageNumber}`
-        );
-
-        setShow([...show, ...response.data]);
-        setaHasMore(response.data.length > 0);
+        const data = await getMoviesAPI(pageNumber);
+        setShow([...show, ...data]);
+        setaHasMore(data.length > 0);
         setLoading(false);
       } catch (error) {
         console.log(error);

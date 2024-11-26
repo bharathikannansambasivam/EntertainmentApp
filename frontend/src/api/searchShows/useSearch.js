@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useReducer, useState } from "react";
+
+import { searchService } from "./searchService";
 
 function useSearchData(word) {
+  // const [state, dispatch] = useReducer(reducerFn, {
+  //   searchResults: [],
+  //   loading: false,
+  //   error: false,
+  // });
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -14,11 +20,8 @@ function useSearchData(word) {
         setLoading(true);
         setError(false);
 
-        const response = await axios.get(
-          `http://localhost:3000/search?title=${word}`
-        );
-
-        setSearchResults(response.data);
+        const data = await searchService(word);
+        setSearchResults(data);
         setLoading(false);
       } catch (error) {
         setError(true);
