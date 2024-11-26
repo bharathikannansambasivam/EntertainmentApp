@@ -1,14 +1,13 @@
-import React from "react";
-import Trending from "./components/Trending";
+import React, { useEffect } from "react";
 import Nav from "./components/Nav";
 import SearchBar from "./components/SearchBar";
 import Bookmarks from "./components/Bookmarks";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Movies from "./components/Movies";
 import TvShows from "./components/TvShows";
-import ShowItem from "./components/ShowItem";
 
 function App() {
+  useEffect(() => {}, <Nav />);
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-primaryBg   text-white ">

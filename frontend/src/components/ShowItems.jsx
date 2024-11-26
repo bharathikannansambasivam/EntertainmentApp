@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import tvIcon from "/assets/icon-category-tv.svg";
 import bookmark from "/assets/icon-bookmark-empty.svg";
 import bookmarked from "/assets/icon-bookmark-full.svg";
-function ShowItem({ show }) {
+function ShowItems({ show }) {
   const [isBookmark, setIsBookmark] = useState(false);
 
   useEffect(() => {
@@ -72,4 +72,4 @@ function ShowItem({ show }) {
   );
 }
 
-export default ShowItem;
+export default ShowItems;

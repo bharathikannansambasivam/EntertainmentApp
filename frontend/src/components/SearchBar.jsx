@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import searchIcon from "/assets/icon-search.svg";
-import ShowItem from "./ShowItem";
+import ShowItems from "./ShowItems";
 import Trending from "./Trending";
 
-import useFetchData from "../api/useFetchData";
-import useSearchData from "../api/useSearch";
+import useFetchData from "../api/fetchShows/useFetchData";
+import useSearchData from "../api/searchShows/useSearch";
 
 function SearchBar() {
   const [showName, setShowName] = useState("");
@@ -42,7 +42,7 @@ function SearchBar() {
   );
 
   return (
-    <div className="min-h-screen  scrollbar-hide   ">
+    <div className="min-h-screen  scrollbar-hide text-white  ">
       <div className="flex  gap-2 text-xl relative   items-center  ">
         <img className="absolute" src={searchIcon} alt="" />
         <input
@@ -58,7 +58,7 @@ function SearchBar() {
       {showName ? (
         <div className="h-full bg-primaryBg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {searchResults.map((item, index) => (
-            <ShowItem key={index} show={item} index={index} />
+            <ShowItems key={index} show={item} index={index} />
           ))}
         </div>
       ) : (
@@ -67,13 +67,13 @@ function SearchBar() {
             if (show.length === index + 1) {
               return (
                 <div ref={lastShow} key={index}>
-                  <ShowItem show={item} index={index} />
+                  <ShowItems show={item} index={index} />
                 </div>
               );
             } else {
               return (
                 <div key={index}>
-                  <ShowItem show={item} index={index} />
+                  <ShowItems show={item} index={index} />
                 </div>
               );
             }

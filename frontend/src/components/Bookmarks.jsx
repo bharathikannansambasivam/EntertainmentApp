@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import ShowItem from "./ShowItem";
-import Trending from "./Trending";
+import ShowItems from "./ShowItems";
 function Bookmarks() {
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
   console.log(bookmarks);
@@ -11,7 +10,7 @@ function Bookmarks() {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-sm">
         {bookmarks.map((movie, index) => (
-          <ShowItem show={movie} key={index} />
+          <ShowItems show={movie} key={index} />
         ))}
       </div>
     </>
