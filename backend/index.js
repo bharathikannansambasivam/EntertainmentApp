@@ -44,6 +44,7 @@ app.get("/search", async (req, res) => {
       res.status(404).json({ message: "No movies found" });
     }
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "An error occurred", err });
   }
 });

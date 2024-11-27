@@ -1,6 +1,6 @@
-import ShowItem from "./ShowItems";
+import ShowItem from "../showItems/ShowItems";
 
-import useFetchData from "../api/fetchShows/useFetchData";
+import useFetchData from "../../api/fetchShows/useFetchData";
 
 export default function Trending() {
   const { show } = useFetchData();
