@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./Search";
 export default {
   title: "Netflix-clone/SearchBar",
   component: SearchBar,

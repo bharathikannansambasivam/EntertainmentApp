@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Nav from "./components/Nav";
-import SearchBar from "./components/SearchBar";
-import Bookmarks from "./components/Bookmarks";
+import Nav from "./components/layout/Nav";
+import SearchResults from "./components/search/SearchResults";
+import Bookmarks from "./components/bookmarks/Bookmarks";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Movies from "./components/Movies";
-import TvShows from "./components/TvShows";
+import Movies from "./components/movies/Movies";
+import TvShows from "./components/tvShows/TvShows";
 
 function App() {
   useEffect(() => {}, <Nav />);
@@ -14,7 +14,7 @@ function App() {
         <Nav />
         <div className="ml-[80px]  p-5">
           <Routes>
-            <Route path="/" element={<SearchBar />}></Route>
+            <Route path="/" element={<SearchResults />}></Route>
 
             <Route path="/bookmark" element={<Bookmarks />}></Route>
             <Route path="/movies" element={<Movies />}></Route>

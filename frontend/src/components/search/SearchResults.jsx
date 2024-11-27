@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import searchIcon from "/assets/icon-search.svg";
-import ShowItems from "./ShowItems";
-import Trending from "./Trending";
+import spinner from "/assets/spinner.gif";
 
-import useFetchData from "../api/fetchShows/useFetchData";
-import useSearchData from "../api/searchShows/useSearch";
+import ShowItems from "../showItems/ShowItems";
+import Trending from "../layout/Trending";
 
-function SearchBar() {
+import useFetchData from "../../api/fetchShows/useFetchData";
+import useSearchData from "../../api/searchShows/useSearch";
+import Search from "./Search";
+function SearchResults() {
   const [showName, setShowName] = useState("");
   const [pageNumber, setpageNumber] = useState(1);
 
@@ -21,7 +22,6 @@ function SearchBar() {
     loading: fetchLoading,
     hasMore,
   } = useFetchData(pageNumber);
-  useSearchData(showName);
   const observer = useRef();
   const lastShow = useCallback(
     (node) => {
@@ -30,36 +30,27 @@ function SearchBar() {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log("Visiblee");
           setpageNumber(pageNumber + 1);
         }
       });
       if (node) observer.current.observe(node);
-
-      console.log(node);
     },
     [fetchLoading, hasMore]
   );
 
   return (
     <div className="min-h-screen  scrollbar-hide text-white  ">
-      <div className="flex  gap-2 text-xl relative   items-center  ">
-        <img className="absolute" src={searchIcon} alt="" />
-        <input
-          onChange={(e) => {
-            setShowName(e.target.value);
-          }}
-          type="search"
-          className="bg-primaryBg p-4 w-full  pl-12"
-          placeholder="Search for movies or TV series"
-        />
-      </div>
+      <Search onSearchChange={setShowName} />
       <div className="">{showName == "" && <Trending />}</div>{" "}
       {showName ? (
         <div className="h-full bg-primaryBg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          {searchResults.map((item, index) => (
-            <ShowItems key={index} show={item} index={index} />
-          ))}
+          {searchResults && searchResults.length > 0 ? (
+            searchResults.map((item, index) => (
+              <ShowItems key={index} show={item} index={index} />
+            ))
+          ) : (
+            <p>No results found for "{showName}"</p>
+          )}
         </div>
       ) : (
         <div className="h-full bg-primaryBg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -82,7 +73,13 @@ function SearchBar() {
       )}
       <p>
         {(fetchLoading || searchLoading) && (
-          <div className="bg-red-600 h-32 w-32">loading..</div>
+          <div className="h-screen w-screen bg-red">
+            <img
+              className="flex justify-center items-center h-10 w-10"
+              src={spinner}
+              alt=""
+            />
+          </div>
         )}
       </p>
       <p>{(fetchError || searchError) && "Error.."}</p>
@@ -90,4 +87,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default SearchResults;
