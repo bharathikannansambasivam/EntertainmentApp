@@ -22,3 +22,4 @@ Scroll through large lists of content without interruptions using the infinite s
 
 Enjoy an optimal layout and user experience on any screen size.
 # EntertainmentApp
+# EntertainmentApp
