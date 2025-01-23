@@ -42,11 +42,15 @@ function SearchResults() {
     <div className="min-h-screen  scrollbar-hide text-white  ">
       <Search onSearchChange={setShowName} />
       <div className="">{showName == "" && <Trending />}</div>{" "}
+      <h1 className="text-white text-3xl mb-3">Shows </h1>
       {showName ? (
         <div className="h-full bg-primaryBg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {searchResults && searchResults.length > 0 ? (
             searchResults.map((item, index) => (
-              <ShowItems key={index} show={item} index={index} />
+              <div>
+                {" "}
+                <ShowItems key={index} show={item} index={index} />
+              </div>
             ))
           ) : (
             <p>No results found for "{showName}"</p>
