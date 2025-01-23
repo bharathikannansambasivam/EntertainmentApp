@@ -25,7 +25,7 @@ function Movies() {
             </div>
           ))
         ) : (
-          <p>No movies found</p>
+          <p>No movies found .</p>
         )}
       </div>
     </div>
