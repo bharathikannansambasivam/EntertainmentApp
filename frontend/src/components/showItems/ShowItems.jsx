@@ -49,7 +49,7 @@ function ShowItems({ show }) {
               <img src={bookmark} alt="Bookmark" />
             )}{" "}
           </div>
-          <div className="my-3">
+          <div className="my-3 ">
             <ul className="flex font-extralight gap-2 items-center">
               <li>{show.year}</li>
               <li className="font-bold">•</li>
@@ -59,7 +59,7 @@ function ShowItems({ show }) {
                 ) : (
                   <img className="h-5 w-5" src={tvIcon} alt="TV Icon" />
                 )}
-                {show.category}
+                <p className=" "> {show.category}</p>
               </li>
               <li className="font-bold">•</li>
               <li>{show.rating}</li>
